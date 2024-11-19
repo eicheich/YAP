@@ -7,7 +7,7 @@ menu_options = ["Login", "Register", "Exit"]
 post_menu_options = ["Timeline", "Buat Postingan", "Cari Postingan", "Logout", "Exit"]
 
 def menu_index():
-    print("Selamat datang di aplikasi Yap! \nMenu:")
+    print("\nSelamat datang di aplikasi Yap! \nMenu:")
     print("+----------------------------+")
     print("|        Selamat datang      |")
     print("|       di aplikasi Yap!     |")
@@ -52,10 +52,12 @@ def menu_post():
         exit_post()
 def exit_post():
     print("+----------------------------+")
-    print("|       Keluar Aplikasi...   |")
-    print("|           /\_/\            |")
-    print("|          ( o.o )           |")
-    print("|           >Bye!<           |")
+    print("|     keluar aplikasi....    |")
+    print("|        ______              |")
+    print("|       /      \             |")
+    print("|      |  -  -  |            |")
+    print("|      |   ---  |            |")
+    print("|       \/Bye!\/             |")
     print("+----------------------------+")
     exit()
     

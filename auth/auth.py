@@ -27,8 +27,12 @@ def register():
             else:
                 data['username'].append(username)
                 data['password'].append(password)
-                file = open('db/data_acc.txt', 'a')
-                file.write(f"\n{username}: {password}")
+                mode = 'a' if os.path.getsize('db/data_acc.txt') > 0 else 'w'
+                file = open('db/data_acc.txt', mode)
+                if mode == 'a':
+                    file.write(f"\n{username}: {password}")
+                else:
+                    file.write(f"{username}: {password}")
                 print('\nAnda berhasil register, silakan login\n')
                 break
 
@@ -62,7 +66,14 @@ def logout():
     if os.path.exists('db/log_account.txt'):
         with open('db/log_account.txt', 'w') as file:
             file.write('')
-        print("\nLogout berhasil!\n")
+        print("+----------------------------+")
+        print("|     logout berhasil ....   |")
+        print("|        ______              |")
+        print("|       /      \             |")
+        print("|      |  -  -  |            |")
+        print("|      |   ---  |            |")
+        print("|       \/Bye!\/             |")
+        print("+----------------------------+")
         
     else:
         print("Anda belum login.")

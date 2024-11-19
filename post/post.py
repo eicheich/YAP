@@ -12,7 +12,7 @@ def store_post():
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open('db/data_post.txt', 'a') as file:
         file.write(f'{username},{post},{timestamp}\n')
-    print('Postingan berhasil dikirim!')
+    print('\nPostingan berhasil dikirim!\n')
     
 def delete_post():
     file = open('db/data_post.txt', 'r')
@@ -29,12 +29,25 @@ def timeline():
     delete_post()
     with open('db/data_post.txt', 'r') as file:
         posts = file.readlines()
-    for post in reversed(posts):
+    sorted_posts = []
+    for post in posts:
         username, post_content, timestamp = post.strip().split(',')
-        print()
-        print("----------------------")
-        print(f'Username: {username}\nPost: {post_content}\n{timestamp}')
-        print("----------------------")
+        sorted_posts.append((username, post_content, timestamp))
+    
+    for i in range(len(sorted_posts)):
+        for j in range(i + 1, len(sorted_posts)):
+            if datetime.strptime(sorted_posts[i][2], '%Y-%m-%d %H:%M:%S') < datetime.strptime(sorted_posts[j][2], '%Y-%m-%d %H:%M:%S'):
+                sorted_posts[i], sorted_posts[j] = sorted_posts[j], sorted_posts[i]
+    
+    if not sorted_posts:
+        print('\nPostingan tidak ada\n')
+    else:
+        for post in sorted_posts:
+            username, post_content, timestamp = post
+            print()
+            print("----------------------")
+            print(f'Username: {username}\nPost: {post_content}\n{timestamp}')
+            print("----------------------")
 
 def search_post():
     delete_post()
@@ -49,4 +62,4 @@ def search_post():
             print()
             print(f'Username: {username}\nPost: {post_content}\n{timestamp}\n')
     if not found:
-        print('Post tidak ditemukan')
+        print('\nPost tidak ditemukan\n')

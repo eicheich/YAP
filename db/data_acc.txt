@@ -1,0 +1,3 @@
+bobi: bobi
+ayam: ayam
+jokowi: jokowi
