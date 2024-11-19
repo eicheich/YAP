@@ -10,12 +10,19 @@ def store_post():
     username = get_username()
     post = input('Masukkan post yang ingin di unggah: ')
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    with open('db/data_post.txt', 'a') as file:
-        file.write(f'{username},{post},{timestamp}\n')
-    print('\nPostingan berhasil dikirim!\n')
+    try:
+        with open('db/data_post.txt', 'a') as file:
+            file.write(f'{username},{post},{timestamp}\n')
+        print('\nPostingan berhasil dikirim!\n')
+    except FileNotFoundError:
+        print('File tidak ditemukan.')
     
 def delete_post():
-    file = open('db/data_post.txt', 'r')
+    try:
+        file = open('db/data_post.txt', 'r')
+    except FileNotFoundError:
+        print('File tidak ditemukan.')
+        return
     lines = file.readlines()
     file.close()
     with open('db/data_post.txt', 'w') as file:
@@ -53,15 +60,18 @@ def search_post():
     delete_post()
     keyword = input('\nMasukkan kata kunci: ')
     found = False
-    with open('db/data_post.txt', 'r') as file:
-        for line in file:
-            username, post_content, timestamp = line.strip().split(',')
-            if keyword in post_content:
-                found = True
-                print()
-                print("----------------------")
-                print(f'Username: {username}\nPost: {post_content}\n{timestamp}')
-                print("----------------------\n")
+    try:
+        with open('db/data_post.txt', 'r') as file:
+            for line in file:
+                username, post_content, timestamp = line.strip().split(',')
+                if keyword in post_content:
+                    found = True
+                    print()
+                    print("----------------------")
+                    print(f'Username: {username}\nPost: {post_content}\n{timestamp}')
+                    print("----------------------\n")
+    except FileNotFoundError:
+        print('File tidak ditemukan.')
                 
     if not found:
         print('\nPost tidak ditemukan\n')

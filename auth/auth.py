@@ -8,6 +8,9 @@ def register():
             username, password = line.strip().split(': ')
             data['username'].append(username)
             data['password'].append(password) 
+    else:
+        print("\nFile data_acc.txt tidak ditemukan.\n")
+        return False
     
     while True:
         print("\nSelamat Datang di Sistem Register \n")
@@ -44,6 +47,9 @@ def login():
             username, password = line.strip().split(': ')
             data['username'].append(username)
             data['password'].append(password)
+    else:
+        print("\nFile data_acc.txt tidak ditemukan.\n")
+        return False
     print("\nSelamat Datang di Sistem Login \n")
     username = input("Masukkan username: ")
     password = input("Masukkan password: ")
@@ -61,19 +67,22 @@ def login():
         else:
             print("\nUsername tidak ditemukan. Silakan coba lagi.\n")
             return False
+    
         
 def logout():
-    if os.path.exists('db/log_account.txt'):
-        with open('db/log_account.txt', 'w') as file:
-            file.write('')
-        print("+----------------------------+")
-        print("|     logout berhasil ....   |")
-        print("|        ______              |")
-        print("|       /      \             |")
-        print("|      |  -  -  |            |")
-        print("|      |   ---  |            |")
-        print("|       \/Bye!\/             |")
-        print("+----------------------------+")
-        
-    else:
-        print("Anda belum login.")
+    try:
+        if os.path.exists('db/log_account.txt'):
+            with open('db/log_account.txt', 'w') as file:
+                file.write('')
+            print("+----------------------------+")
+            print("|     logout berhasil ....   |")
+            print("|        ______              |")
+            print("|       /      \             |")
+            print("|      |  -  -  |            |")
+            print("|      |   ---  |            |")
+            print("|       \/Bye!\/             |")
+            print("+----------------------------+")
+        else:
+            raise FileNotFoundError("File log_account.txt tidak ditemukan.")
+    except FileNotFoundError as e:
+        print(e)
