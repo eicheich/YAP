@@ -18,7 +18,7 @@ def menu_index():
     print("+----------------------------+")
     for i, option in enumerate(menu_options, 1):
         print(f" {i}. {option}")
-    input_menu = input(f"Masukkan pilihan Anda: ")
+    input_menu = input(f"Masukkan pilihan Anda (1/2/3): ")
     if input_menu == "1":
         auth = login()
         if auth == True:
@@ -35,7 +35,7 @@ def menu_post():
     print("Selamat datang di Yap! \nMenu:")
     for i, option in enumerate(post_menu_options, 1):
         print(f" {i}. {option}")
-    input_menu = input("Masukkan pilihan Anda: ")
+    input_menu = input("Masukkan pilihan Anda (1/2/3/4/5): ")
     if input_menu == "1":
         timeline()
         menu_post()
