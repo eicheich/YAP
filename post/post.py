@@ -52,14 +52,16 @@ def timeline():
 def search_post():
     delete_post()
     keyword = input('\nMasukkan kata kunci: ')
-    with open('db/data_post.txt', 'r') as file:
-        posts = file.readlines()
     found = False
-    for post in posts:
-        username, post_content, timestamp = post.strip().split(',')
-        if keyword in post_content:
-            found = True
-            print()
-            print(f'Username: {username}\nPost: {post_content}\n{timestamp}\n')
+    with open('db/data_post.txt', 'r') as file:
+        for line in file:
+            username, post_content, timestamp = line.strip().split(',')
+            if keyword in post_content:
+                found = True
+                print()
+                print("----------------------")
+                print(f'Username: {username}\nPost: {post_content}\n{timestamp}')
+                print("----------------------\n")
+                
     if not found:
         print('\nPost tidak ditemukan\n')
